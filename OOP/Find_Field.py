@@ -2,12 +2,9 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
-img = cv2.imread('C:/Users/jprr2/Videos/Logitech/LogiCapture/cancha_real4.jpg')
-img = cv2.medianBlur(img, 7)
-external_contours = np.zeros_like(img)
-rgb_img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-hsv_img = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-lab_img = cv2.cvtColor(img, cv2.COLOR_BGR2LAB)
+cap = cv2.VideoCapture(0)
+
+
 lab_boundaries = [[200, 120, 120], [255, 170, 170]]
 
 def check_boundaries(boundaries):
@@ -33,9 +30,12 @@ cv2.setMouseCallback("img", position)
 
 while True:
 
-    img = cv2.imread('C:/Users/jprr2/Videos/Logitech/LogiCapture/cancha_real4.jpg')
+    ret, img = cap.read
     img = cv2.medianBlur(img, 7)
     external_contours = np.zeros_like(img)
+    rgb_img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    hsv_img = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+    lab_img = cv2.cvtColor(img, cv2.COLOR_BGR2LAB)
 
     check_boundaries(lab_boundaries)
 
@@ -95,13 +95,11 @@ while True:
     cv2.circle(img, (cX, cY), 10, (0,255,0), -1)
 
     cv2.imshow('img', img)
-    cv2.imshow('mask', mask)
-    cv2.imshow('contours', external_contours)
+    #cv2.imshow('mask', mask)
+    #cv2.imshow('contours', external_contours)
 
     k = cv2.waitKey(1)
     if k == 27:
         break
 
 cv2.destroyAllWindows()
-print(conv_hull)
-print(esquinas)

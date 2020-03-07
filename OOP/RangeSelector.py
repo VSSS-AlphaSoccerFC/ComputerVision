@@ -8,7 +8,6 @@ def range_selector(color_code, values):
     
     root.title('Range Selector')
     root.geometry('400x300')
-    root.color_code = color_code
 
     root.columnconfigure(1, weight=1)
     root.rowconfigure(0, weight=1)
@@ -82,6 +81,7 @@ def range_selector(color_code, values):
 
     done_button = ttk.Button(root, text='Done', command=root.destroy)
     done_button.grid(row=3, column=1, pady=15, sticky='EW')
+    print(color_code)
 
     root.mainloop()
 
